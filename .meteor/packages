@@ -1,0 +1,30 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+autopublish
+insecure
+less
+nemo64:bootstrap
+coffeescript
+jquery
+iron:router
+accounts-password
+accounts-google
+accounts-facebook
+accounts-ui-unstyled
+useraccounts:bootstrap
+service-configuration
+tomi:upload-jquery
+edgee:slingshot
+chrismbeckett:toastr
+isotope:isotope
+mrt:jquery-imagesloaded
+smeevil:reactive-block-grid
+percolate:momentum
+percolate:momentum-iron-router
+alethes:pages@=1.7.1
+percolate:velocityjs

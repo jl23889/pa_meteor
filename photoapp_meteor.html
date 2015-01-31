@@ -1,0 +1,185 @@
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<title>Photoapp Meteor</title>
+</head>
+<body>
+	{{> Router}}
+</body>
+
+<template name="ApplicationLayout">
+	{{#if currentUser}}    
+		{{> leftNav}}
+	{{else}}
+		{{> leftNavSignIn}}
+	{{/if}}
+	<div class="main-wrapper">
+		<header>
+			{{> navbar}}
+		</header>
+		<main>
+			{{> yield}}
+		</main>
+	</div>
+</template>
+
+<template name="welcome">
+	<div class="container">
+		<div class="form-signin">
+			{{> atForm}}
+		</div>
+	</div>
+</template>
+
+<template name="signIn">
+	<div class="container">
+		<div class="form-signin">
+			{{> atForm}}
+		</div>
+	</div>
+</template>
+
+<template name="photos">
+	{{> pagesNav}}
+	<nav class="navbar">
+		<div class="photo-nav">
+			<div class="container">
+				<h3>Browsing Photos</h3>
+
+				{{#if currentUser}}
+					<button type="input" class="btn btn-sm btn-info my-photos">My Photos</button>
+				{{/if}}
+				<button type="input" class="btn btn-sm btn-info all-photos">All Photos</button>
+			</div>
+		</div>
+	</nav>
+	<div class="container thumbnail-container" id="photo-thumbnail-container">
+		<ul class="list-unstyled">
+			{{#each photos}}
+	      {{> photo}}
+	    {{/each}}
+		</ul>
+	</div>
+</template>
+
+<template name="albums">
+	{{> pagesNav}}
+	<div class="container thumbnail-container">
+		<ul class="list-unstyled">
+			{{#each albums}}
+	      {{> album}}
+	    {{/each}}
+		</ul>
+	</div>
+</template>
+
+<template name="home">
+	<!-- welcome jumbotron -->
+	<div class="jumbotron margin-top-nav" id="welcome-hero">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-xs-4 profile-photo-wrapper">
+	        <div class="thumbnail profile-photo pull-right" id="profile-photo-upload">
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="container">
+		<p>Welcome, {{currentUser.profile.name}}!</p>
+	</div>
+</template>
+
+<!-- signout leftnav -->
+<template name="leftNav">
+	<nav id="navbar-left">
+		<ul id="main-menu">
+			<li>
+        <img src={{profilePhoto}} alt="">
+        <span class="mm-list-item-inline">My Profile</span>
+				<ul>
+          <li><span>Change Profile Picture</span>
+            <ul>
+              <li>
+                <form class="upload">
+                  <input type="file" id="profilePhotoFile" accept="image/*"/>
+                </form>
+                <input type="submit" class="btn btn-block btn-success add-profilePhoto">
+              </li>
+            </ul>
+          </li>
+          <li><a href="/profile/edit">Edit Profile</a></li>
+          <li><a href="/profile/settings">Settings</a></li>
+					<li class="Spacer"><a href="/sign_out">Sign Out</a></li>
+				</ul>
+			</li>
+      <li class="Spacer"></li>
+      <li>
+				<a href="/photos">
+					<span class="glyphicon glyphicon-camera"></span> Photos
+				</a>
+        <ul id="sort-photos">
+          <li id="setting-ownedBy">
+            <span>Owned By </span>
+            <em class="Counter">Anyone</em>
+            <ul id="ownedBy">
+              <li><span>Anyone</span></li>
+              <li><span>Me</span></li>
+            </ul>
+          </li>
+          <li class="Label">Categories</li>
+          <li><span>Animals</span><input type="checkbox" class="Toggle" /></li>  
+          <li><span>Cityscape</span><input type="checkbox" class="Toggle" /></li>
+          <li><span>Design</span><input type="checkbox" class="Toggle" /></li>
+          <li><span>Landscape</span><input type="checkbox" class="Toggle" /></li>
+          <li><span>Plants</span><input type="checkbox" class="Toggle" /></li>
+          <li class="Footer"><a class="button" href="#">Search</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="/albums">
+					<span class="glyphicon glyphicon-book"></span> Albums
+				</a>
+			</li>
+	    <li><span>Upload Photos</span>
+	    	<ul>
+	    		<li>
+						<form class="upload">
+							<input type="file" id="photoFiles" multiple="true" accept="image/*"/>
+						</form>
+						<input type="submit" class="btn btn-block btn-primary add-photos">
+					</li>
+				</ul>
+				<!-- {{#each photos}}
+	        {{> photo}}
+	      {{/each}} -->
+	    </li>
+		</ul>
+	</nav>
+</template>
+
+<!-- signin leftnav -->
+<template name="leftNavSignIn">
+	<nav id="navbar-left">
+		<ul>
+			<li>
+				<a href="/photos">
+					<span class="glyphicon glyphicon-camera"></span> Photos
+				</a>
+			</li>
+			<li>
+				<a href="/albums">
+					<span class="glyphicon glyphicon-book"></span> Albums
+				</a>
+			</li>
+			<li><a href="/sign_in">Sign In</a></li>
+		</ul>
+	</nav>
+</template>
+
+<template name="photo">
+	<div class="thumbnail">
+		<a href={{url}} rel="fluidbox">
+			<img src={{url}} alt="">
+		</a>
+	</div>
+</template>

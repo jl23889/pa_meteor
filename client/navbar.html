@@ -1,0 +1,93 @@
+<template name="navbar">
+
+	<!-- mobile navbar -->
+	<nav class="navbar main-nav visible-xs-block">
+		<div class="container container-no-padding">
+			<form accept-charset="UTF-8" action="/search" id="navbar-search-mobile" class="navbar-form navbar-left" method="get">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-btn">
+							<a href="#navbar-left" id="navbar-sidebar-btn-mobile" class="btn btn-default">
+								<span class="glyphicon glyphicon-list"></span>
+							</a>
+						</div>
+						<input class="form-control" id="navbar-search-query-mobile" name="query" placeholder="Search" type="text">
+						<div class="input-group-btn">
+							<button type="submit" id="navbar-search-btn-mobile" class="btn btn-default">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</nav>
+
+	<!-- desktop navbar -->
+	<nav class="navbar main-nav hidden-xs">
+		<div class="container">
+			<!-- <div class="navbar-header">
+				<div class="navbar-brand">
+					PhotoApp
+				</div>
+
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="glyphicon glyphicon-list"></span>
+				</button>
+			</div> -->
+			<div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/photos">
+							<span class="glyphicon glyphicon-camera"></span> Photos
+						</a>
+					</li>
+					<li>
+						<a href="/albums">
+							<span class="glyphicon glyphicon-book"></span> Albums
+						</a>
+					</li>
+				</ul>
+				<form accept-charset="UTF-8" action="/search" id="navbar-search" class="navbar-form navbar-left" method="get">
+					<div class="form-group">
+						<div class="input-group">
+							<input class="form-control" id="navbar-search-query" name="query" placeholder="Search" type="text">
+							<div class="input-group-btn">
+								<button type="submit" id="navbar-search-btn" class="btn btn-default">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					{{#if currentUser}}
+						<li>
+							<a href="/uploadPhoto" class="toggle-upload-photo"><span class="glyphicon glyphicon-cloud-upload"></span>
+						Upload Photo</a>
+						</li>
+
+						<li>
+							<a href="/home"><span class="glyphicon glyphicon-user"></span> 
+							<!-- {{currentUser.profile.name}} -->
+								Profile
+							</a>
+						</li>
+						<li>
+							<button id="navbar-dropdown-btn" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-right" id="navbar-dropdown">
+								<li>
+									<a href="/sign_out">Sign Out</a>
+								</li>
+							</ul>
+						</li>
+					{{else}}
+						<li><a href="/sign_in">Sign In</a></li>
+					{{/if}}
+ 				</ul>
+			</div>
+		</div>
+	</nav>
+</template>
