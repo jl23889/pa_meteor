@@ -24,10 +24,12 @@ if Meteor.isClient
     @render 'Albums'
 
   Router.route '/sign_in', ->
+    $('#navbar-left').trigger 'close.mm'
     @render 'SignIn'
 
   Router.route '/sign_out', ->
     Meteor.logout()
+    $('#navbar-left').trigger 'close.mm'
     @render 'Welcome'
 
   Router.route '/home', ->
@@ -68,11 +70,19 @@ if Meteor.isClient
 
   Template.leftNavSignIn.rendered = ->
     this.$('#navbar-left').mmenu(
-      classes: "mm-black",
+      classes: "mm-white",
       header: 
         add: true,
+        title: "Photoapp",
         update: true
     )  
+
+    #	Choose photo owner
+    $sortPhotos = this.$('#sort-photos')
+    $ownedBy = $("#setting-ownedBy .mm-counter")
+    this.$("#ownedBy").find("li span").click ->
+      $ownedBy.text $(this).text()
+      $sortPhotos.trigger "open.mm"
     
   Template.photo.rendered = ->
     ## attach fluidbox 
