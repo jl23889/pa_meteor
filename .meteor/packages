@@ -28,3 +28,7 @@ percolate:momentum
 percolate:momentum-iron-router
 alethes:pages@=1.7.1
 percolate:velocityjs
+aldeed:autoform
+natestrauser:select2
+zimme:select2-bootstrap3-css
+aldeed:autoform-select2
