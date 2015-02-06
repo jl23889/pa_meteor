@@ -7,10 +7,34 @@ Schemas.Photo = new SimpleSchema(
     type: String
     label: "Title"
     max: 200
-
-  owner:
+  
+  categories:
+    type: [String]
+    label: "Categories"
+    optional: true
+    autoform: 
+      type: "select2",
+      afFieldInput:
+        multiple: true
+      options: ->
+        [
+          {label: "Animal", value: "animal"},
+          {label: "Cityscape", value: "cityscape"},
+          {label: "Design", value: "design"},
+          {label: "Landscape", value: "landscape"},
+          {label: "Plants", value: "plants"}
+        ]
+  
+  accessControl:
     type: String
-    label: "Owner"
+    label: "Set Access Level"
+    autoform: 
+      type: "select-radio-inline",
+      options: ->
+        [
+          {label: "Public", value: "public"},
+          {label: "Private", value: "private"}
+        ]
 )
 Photos.attachSchema Schemas.Photo
 

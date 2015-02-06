@@ -202,12 +202,15 @@
 </template>
 
 <template name="photoEdit">
-  {{#autoForm collection=Photos doc=this id="editPhotoForm" type="update" }}
-  <fieldset>
-    <legend>Update Photo</legend>
-    {{> afQuickField name='title'}}
-    {{> afQuickField name='owner'}}
-  </fieldset>
-  <button type="submit" class="btn btn-primary">Update</button>
-  {{/autoForm}}
+  <div class="container">
+    {{#autoForm collection=Photos doc=this id="editPhotoForm" type="update" }}
+    <fieldset>
+      <legend>Update Photo</legend>
+      {{> afQuickField name='title'}}
+      {{> afQuickField name='categories'}}
+      {{> afQuickField name='accessControl'}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Update</button>
+    {{/autoForm}}
+  </div>
 </template>
