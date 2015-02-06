@@ -6,6 +6,7 @@ accounts-password@1.0.6
 accounts-ui-unstyled@1.1.6
 aldeed:autoform@4.2.2
 aldeed:autoform-select2@1.0.4
+aldeed:collection2@2.3.1
 aldeed:simple-schema@1.1.0
 alethes:pages@1.7.1
 application-configuration@1.0.4

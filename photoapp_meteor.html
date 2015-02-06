@@ -127,12 +127,12 @@
             </ul>
           </li>
           <li class="Label">Categories</li>
-          <li><span>Animals</span><input type="checkbox" class="Toggle" /></li>  
-          <li><span>Cityscape</span><input type="checkbox" class="Toggle" /></li>
-          <li><span>Design</span><input type="checkbox" class="Toggle" /></li>
-          <li><span>Landscape</span><input type="checkbox" class="Toggle" /></li>
-          <li><span>Plants</span><input type="checkbox" class="Toggle" /></li>
-          <li class="Footer"><a class="button" href="#">Search</a></li>
+          <li><span>Animals</span><input type="checkbox" class="Toggle" id="animals-toggle"/></li>  
+          <li><span>Cityscape</span><input type="checkbox" class="Toggle" id="cityscape-toggle"/></li>
+          <li><span>Design</span><input type="checkbox" class="Toggle" id="design-toggle"/></li>
+          <li><span>Landscape</span><input type="checkbox" class="Toggle" id="landscape-toggle"/></li>
+          <li><span>Plants</span><input type="checkbox" class="Toggle" id="plants-toggle"/></li>
+          <li><a class="button" id="photos-search" href="#">Search</a></li>
 				</ul>
 			</li>
 			<li>
@@ -165,6 +165,23 @@
 				<a href="/photos">
 					<span class="glyphicon glyphicon-camera"></span> Photos
 				</a>
+        <ul id="sort-photos">
+          <li id="setting-ownedBy">
+            <span>Owned By </span>
+            <em class="Counter">Anyone</em>
+            <ul id="ownedBy">
+              <li><span>Anyone</span></li>
+              <li><span>Me</span></li>
+            </ul>
+          </li>
+          <li class="Label">Categories</li>
+          <li><span>Animals</span><input type="checkbox" class="Toggle" /></li>  
+          <li><span>Cityscape</span><input type="checkbox" class="Toggle" /></li>
+          <li><span>Design</span><input type="checkbox" class="Toggle" /></li>
+          <li><span>Landscape</span><input type="checkbox" class="Toggle" /></li>
+          <li><span>Plants</span><input type="checkbox" class="Toggle" /></li>
+          <li><a class="button" id="photos-search" href="/photos/search">Search</a></li>
+				</ul>
 			</li>
 			<li>
 				<a href="/albums">
@@ -182,4 +199,15 @@
 			<img src={{url}} alt="">
 		</a>
 	</div>
+</template>
+
+<template name="photoEdit">
+  {{#autoForm collection=Photos id="editPhotoForm" type="update" }}
+  <fieldset>
+    <legend>Update Photo</legend>
+    {{> afQuickField name='title'}}
+    {{> afQuickField name='owner'}}
+  </fieldset>
+  <button type="submit" class="btn btn-primary">Update</button>
+  {{/autoForm}}
 </template>

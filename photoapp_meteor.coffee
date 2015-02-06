@@ -1,5 +1,19 @@
 Photos = new Mongo.Collection("photos")
 Albums = new Mongo.Collection("albums")
+
+Schemas = {}
+Schemas.Photo = new SimpleSchema(
+  title:
+    type: String
+    label: "Title"
+    max: 200
+
+  owner:
+    type: String
+    label: "Owner"
+)
+Photos.attachSchema Schemas.Photo
+
 ## paginate photos
 PhotoPages = new Meteor.Pagination Photos,
   perPage: 20
@@ -20,6 +34,14 @@ if Meteor.isClient
   Router.route '/photos', ->
     @render 'Photos'
 
+  Router.route '/photo/edit/:_id', (->
+    @render 'PhotoEdit',
+      data: ->
+        Photos.findOne _id: @params._id
+  ),
+    name: "photo.edit"
+
+    
   Router.route '/albums', ->
     @render 'Albums'
 
@@ -48,6 +70,8 @@ if Meteor.isClient
     closeButton: true,
     positionClass: "toast-bottom-left"
 
+  Template.registerHelper "Photos", Photos
+    
   Template.leftNav.rendered = ->
     this.$('#navbar-left').mmenu(
       classes: "mm-white",
@@ -125,6 +149,12 @@ if Meteor.isClient
 
     'click .all-photos': (e) ->
       Session.set("userId", "")
+      
+    'click .thumbnail': (e) ->
+      console.log ('clicked fluuidbox')
+      console.log (this._id)
+      Router.go "photo.edit",
+        _id: this._id
   )
 
   Template.leftNav.helpers(
