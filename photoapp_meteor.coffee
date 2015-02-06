@@ -3,6 +3,16 @@ Albums = new Mongo.Collection("albums")
 
 Schemas = {}
 Schemas.Photo = new SimpleSchema(
+
+  owner_id: 
+    type: String
+  
+  url: 
+    type: String
+  
+  dateCreated: 
+    type: Date
+
   title:
     type: String
     label: "Title"
@@ -223,7 +233,8 @@ if Meteor.isClient
             Photos.insert(
               owner_id: Meteor.userId()
               "url": url
-              createdAt: new Date()
+              dateCreated: new Date()
+              title: file.name
             )
             toastr.success(
               "Upload successful!"
