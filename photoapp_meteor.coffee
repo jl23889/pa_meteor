@@ -144,13 +144,16 @@ if Meteor.isClient
   Template.photo.rendered = ->
     ## attach fluidbox 
     ## docs@https://github.com/terrymun/Fluidbox
-    $thumbnail = this.$('a[rel="fluidbox"]')
+    $caption = this.$('.caption')
+    $fluidbox = this.$('a[rel="fluidbox"]')
     # detect mobile by browser size
     isMobile = window.matchMedia("only screen and (max-width: 768px)").matches
-    $thumbnail.fluidbox(
+    $fluidbox.fluidbox(
       isMobile: isMobile
+    ).on( 'openstart', ->
+      $caption.hide()
     )
-
+    
   Template.photo.events(
     'mouseenter .thumbnail': (e) ->
       $(e.target).find('.caption').fadeTo(500, 0.8)
