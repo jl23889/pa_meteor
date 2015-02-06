@@ -202,7 +202,7 @@
 </template>
 
 <template name="photoEdit">
-  {{#autoForm collection=Photos id="editPhotoForm" type="update" }}
+  {{#autoForm collection=Photos doc=this id="editPhotoForm" type="update" }}
   <fieldset>
     <legend>Update Photo</legend>
     {{> afQuickField name='title'}}
