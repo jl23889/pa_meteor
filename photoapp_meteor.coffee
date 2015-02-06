@@ -74,7 +74,6 @@ if Meteor.isClient
         Photos.findOne _id: @params._id
   ),
     name: "photo.edit"
-
     
   Router.route '/albums', ->
     @render 'Albums'
@@ -152,6 +151,22 @@ if Meteor.isClient
       isMobile: isMobile
     )
 
+  Template.photo.events(
+    'mouseenter .thumbnail': (e) ->
+      $(e.target).find('.caption').fadeTo(500, 0.8)
+
+    'mouseleave .thumbnail': (e) ->
+      $(e.target).find('.caption').fadeTo(500, 0)
+  )
+
+  Template.photo.helpers(
+    ownedPhoto: ->
+      if Meteor.userId() == this.owner_id
+        true
+      else
+        false
+  )
+
   Template.photos.created = ->
     ## userId = any
     Session.setDefault("userId","")
@@ -183,12 +198,6 @@ if Meteor.isClient
 
     'click .all-photos': (e) ->
       Session.set("userId", "")
-      
-    'click .thumbnail': (e) ->
-      console.log ('clicked fluuidbox')
-      console.log (this._id)
-      Router.go "photo.edit",
-        _id: this._id
   )
 
   Template.leftNav.helpers(

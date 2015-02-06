@@ -198,6 +198,16 @@
 		<a href={{url}} rel="fluidbox">
 			<img src={{url}} alt="">
 		</a>
+		<div class="caption">
+			<div class="caption-content">
+				<span>
+					{{title}}
+				</span>
+				{{#if ownedPhoto }}
+					<a class="btn btn-small btn-info" href="/photo/edit/{{_id}}">Edit</a>
+				{{/if}}
+			</div>
+		</div>
 	</div>
 </template>
 
