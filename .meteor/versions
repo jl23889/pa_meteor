@@ -60,6 +60,7 @@ minimongo@1.0.6
 mobile-status-bar@1.0.2
 momentjs:moment@2.8.4
 mongo@1.0.11
+mpowaga:string-template@0.1.0
 mquandalle:jade@0.4.1
 mrt:jquery-imagesloaded@0.0.2
 natestrauser:select2@3.5.1
@@ -73,6 +74,7 @@ ordered-dict@1.0.2
 percolate:momentum@0.7.0
 percolate:momentum-iron-router@0.7.0
 percolate:velocityjs@1.1.0
+raix:handlebar-helpers@0.2.4
 random@1.0.2
 reactive-dict@1.0.5
 reactive-var@1.0.4
@@ -97,4 +99,5 @@ useraccounts:bootstrap@1.5.0
 useraccounts:core@1.5.0
 webapp@1.1.6
 webapp-hashing@1.0.2
+yogiben:autoform-modals@0.2.9
 zimme:select2-bootstrap3-css@1.4.1
