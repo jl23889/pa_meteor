@@ -156,10 +156,6 @@ if Meteor.isClient
   Template.leftNav.rendered = ->
     this.$('#navbar-left').mmenu(
       classes: "mm-white",
-      footer:
-        add: true,
-        content: ""
-        update: true
       header: 
         add: true,
         title: "Photoapp",
@@ -172,6 +168,12 @@ if Meteor.isClient
     this.$("#ownedBy").find("li span").click ->
       $ownedBy.text $(this).text()
       $sortPhotos.trigger "open.mm"
+
+    # Close mmenu after hitting link
+    $('.photos-link').click ->
+      $('#navbar-left').trigger "close.mm"
+    $('.albums-link').click ->
+      $('#navbar-left').trigger "close.mm"
 
   Template.leftNavSignIn.rendered = ->
     this.$('#navbar-left').mmenu(
@@ -189,6 +191,12 @@ if Meteor.isClient
       $ownedBy.text $(this).text()
       $sortPhotos.trigger "open.mm"
     
+    # Close mmenu after hitting link
+    $('.photos-link').click ->
+      $('#navbar-left').trigger "close.mm"
+    $('.albums-link').click ->
+      $('#navbar-left').trigger "close.mm"
+
   Template.photo.rendered = ->
     ## attach fluidbox 
     ## docs@https://github.com/terrymun/Fluidbox
