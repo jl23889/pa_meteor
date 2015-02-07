@@ -155,7 +155,7 @@ if Meteor.isClient
     
   Template.leftNav.rendered = ->
     this.$('#navbar-left').mmenu(
-      classes: "mm-white",
+      classes: "mm-white mm-slide",
       header: 
         add: true,
         title: "Photoapp",
@@ -177,7 +177,7 @@ if Meteor.isClient
 
   Template.leftNavSignIn.rendered = ->
     this.$('#navbar-left').mmenu(
-      classes: "mm-white",
+      classes: "mm-white mm-slide",
       header: 
         add: true,
         title: "Photoapp",
