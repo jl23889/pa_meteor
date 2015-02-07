@@ -6,6 +6,9 @@ Schemas.Photo = new SimpleSchema(
 
   owner_id: 
     type: String
+
+  ownerUsername:
+    type: String
   
   url: 
     type: String
@@ -104,6 +107,37 @@ if Meteor.isClient
     positionClass: "toast-bottom-left"
 
   Template.registerHelper "Photos", Photos
+
+  ##useraccount templates
+  ##
+  AccountsTemplates.removeField('email');
+  AccountsTemplates.addFields [
+    ## add username field; allow signin by username or email
+    {
+      _id: 'username'
+      type: 'text'
+      required: true
+      func: (value) ->
+        if Meteor.isClient
+          self = this
+          Meteor.call 'userExists', value, (err, userExists) ->
+            if !userExists
+              self.setSuccess()
+            else
+              self.setError userExists
+            self.setValidating false
+        # Server
+        Meteor.call 'userExists', value
+    }
+    {
+      _id: 'email'
+      type: 'email'
+      required: true
+      displayName: 'email'
+      re: /.+@(.+){2,}\.(.+){2,}/
+      errStr: 'Invalid email'
+    }
+  ]
     
   Template.leftNav.rendered = ->
     this.$('#navbar-left').mmenu(
@@ -153,13 +187,13 @@ if Meteor.isClient
     ).on( 'openstart', ->
       $caption.hide()
     )
-    
+
   Template.photo.events(
     'mouseenter .thumbnail': (e) ->
-      $(e.target).find('.caption').fadeTo(500, 0.8)
+      $(e.target).find('.caption').fadeTo(200, 0.8)
 
     'mouseleave .thumbnail': (e) ->
-      $(e.target).find('.caption').fadeTo(500, 0)
+      $(e.target).find('.caption').fadeTo(400, 0)
   )
 
   Template.photo.helpers(
@@ -243,10 +277,12 @@ if Meteor.isClient
             console.error error
           else 
             Photos.insert(
-              owner_id: Meteor.userId()
-              "url": url
+              accessControl: "public"
               dateCreated: new Date()
+              owner_id: Meteor.userId()
+              ownerUsername: Meteor.user().username
               title: file.name
+              "url": url
             )
             toastr.success(
               "Upload successful!"
@@ -310,4 +346,9 @@ if Meteor.isClient
 
 
 if Meteor.isServer
+
+  ## useraccount validation
+  Meteor.methods 'userExists': (username) ->
+    !!Meteor.users.findOne(username: username)
+
   Meteor.startup ->

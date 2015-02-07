@@ -200,11 +200,16 @@
 		</a>
 		<div class="caption">
 			<div class="caption-content">
-				<span>
-					{{title}}
+				<span class="col-xs-9">
+					<div class="thumbnail-title">
+						{{title}}
+					</div>
+					<div class="thumbnail-owner">
+						{{ownerUsername}}
+					</div>
 				</span>
 				{{#if ownedPhoto }}
-					<a class="btn btn-small btn-info" href="/photo/edit/{{_id}}">Edit</a>
+					<a class="btn btn-small btn-info pull-right" href="/photo/edit/{{_id}}">Edit</a>
 				{{/if}}
 			</div>
 		</div>
