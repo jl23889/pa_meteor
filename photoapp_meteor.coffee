@@ -69,6 +69,7 @@ if Meteor.isClient
     'photos'
     'albums'
     'sign_in'
+    'sign_out'
     'atSignIn'
     'atSignUp'
     'atForgotPassword'
@@ -81,9 +82,13 @@ if Meteor.isClient
     @render 'Photos'
 
   Router.route '/photo/edit/:_id', (->
-    @render 'PhotoEdit',
-      data: ->
-        Photos.findOne _id: @params._id
+    $photo = Photos.findOne _id: @params._id
+    if Meteor.user()._id == $photo.owner_id
+      @render 'PhotoEdit',
+        data: ->
+          Photos.findOne _id: @params._id
+    else 
+      @render 'UserAccessDenied'
   ),
     name: "photo.edit"
     
