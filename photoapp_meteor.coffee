@@ -91,6 +91,9 @@ if Meteor.isClient
       @render 'UserAccessDenied'
   ),
     name: "photo.edit"
+
+  Router.route '/photo/upload', ->
+    @render 'UploadPhoto'
     
   Router.route '/albums', ->
     @render 'Albums'
@@ -112,9 +115,6 @@ if Meteor.isClient
 
   Router.route '/profile/settings', ->
     @render 'EditSettings'
-
-  Router.route '/uploadPhoto', ->
-    @render 'UploadPhoto',
 
   toastr.options = 
     closeButton: true,
@@ -364,6 +364,53 @@ if Meteor.isClient
           sort: 
             createdAt: -1
   )  
+
+  ## uploadPhoto
+  ##
+
+  Template.uploadPhoto.events(
+    'click .add-photos': (e) ->
+      e.preventDefault()
+
+      uploads = _.map document.getElementById('desktopPhotoFiles').files, (file) ->
+        upload = new Slingshot.Upload("myFileUploads")
+        console.log file
+
+        # client side validation
+        error = upload.validate(file)
+        if error
+          console.error error
+
+        # toastr notification
+        toastr.info(
+          "Uploading photo: " + file.name
+          "Upload in Progress"
+        )
+
+        # upload to s3
+        upload.send file, (error, url) ->
+
+          ## save photo to user document
+          # Meteor.users.update Meteor.userId(), 
+          #   $push: 
+          #     "profile.photos": url
+
+          if error 
+            console.error error
+          else 
+            Photos.insert(
+              accessControl: "public"
+              dateCreated: new Date()
+              owner_id: Meteor.userId()
+              ownerUsername: Meteor.user().username
+              title: file.name
+              "url": url
+            )
+            toastr.success(
+              "Upload successful!"
+            )
+        upload
+  ) 
 
 
 

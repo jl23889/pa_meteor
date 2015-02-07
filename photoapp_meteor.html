@@ -141,7 +141,7 @@
 				</a>
 			</li>
 	    <li><span>Upload Photos</span>
-	    	<ul>
+	    	<ul id="upload-photos">
 	    		<li>
 						<form class="upload">
 							<input type="file" id="photoFiles" multiple="true" accept="image/*"/>
@@ -227,6 +227,20 @@
     </fieldset>
     <button type="submit" class="btn btn-primary">Update</button>
     {{/autoForm}}
+  </div>
+</template>
+
+<template name="uploadPhoto">
+  <div class="container">
+    <h3>Upload Photos</h3>
+		<form class="upload">
+			<input type="file" id="desktopPhotoFiles" multiple="true" accept="image/*"/>
+			<button class="btn btn-primary add-photos">Add Photos</button>
+		</form>
+		
+		<!-- {{#each photos}}
+      {{> photo}}
+    {{/each}} -->
   </div>
 </template>
 
