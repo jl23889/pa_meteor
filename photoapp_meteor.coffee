@@ -65,6 +65,15 @@ if Meteor.isClient
     layoutTemplate: 'ApplicationLayout'
   )
 
+  Router.onBeforeAction AccountsTemplates.ensureSignedIn, except: [
+    'photos'
+    'albums'
+    'sign_in'
+    'atSignIn'
+    'atSignUp'
+    'atForgotPassword'
+  ]
+
   Router.route '/', ->
     @render 'Welcome'
 
