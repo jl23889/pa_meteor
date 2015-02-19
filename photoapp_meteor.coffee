@@ -81,7 +81,15 @@ if Meteor.isClient
   Router.route '/photos', ->
     @render 'Photos'
 
-  Router.route '/photo/edit/:_id', (->
+  Router.route '/photo/:_id', (->
+    $photo = Photos.findOne _id: @params._id
+    @render 'PhotoShow',
+      data: ->
+        Photos.findOne _id: @params._id
+  ),
+    name: "photo.show"
+
+  Router.route '/photo/:_id/edit', (->
     $photo = Photos.findOne _id: @params._id
     if Meteor.user()._id == $photo.owner_id
       @render 'PhotoEdit',
@@ -92,7 +100,7 @@ if Meteor.isClient
   ),
     name: "photo.edit"
 
-  Router.route '/photo/upload', ->
+  Router.route '/photos/upload', ->
     @render 'UploadPhoto'
     
   Router.route '/albums', ->

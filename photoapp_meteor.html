@@ -202,22 +202,29 @@
 			<div class="caption-content">
 				<span class="col-xs-9">
 					<div class="thumbnail-title">
-						{{title}}
+						<a href="/photo/{{_id}}">{{title}}</a>
 					</div>
 					<div class="thumbnail-owner">
 						{{ownerUsername}}
 					</div>
 				</span>
 				{{#if ownedPhoto }}
-					<a class="btn btn-small btn-info pull-right" href="/photo/edit/{{_id}}">Edit</a>
+					<a class="btn btn-small btn-info pull-right" href="/photo/{{_id}}/edit">Edit</a>
 				{{/if}}
 			</div>
 		</div>
 	</div>
 </template>
 
+<template name="photoShow">
+  <div class="container">
+    <img src={{url}}>
+  </div>
+</template>
+
 <template name="photoEdit">
   <div class="container">
+  	<img src={{url}}>
     {{#autoForm collection=Photos doc=this id="editPhotoForm" type="update" }}
     <fieldset>
       <legend>Update Photo</legend>
